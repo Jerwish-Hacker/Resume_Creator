@@ -1,0 +1,133 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Image;
+
+public class main {
+	   public static void main(String[] args){
+        // Create PDF document instance
+        Document doc = new Document();
+
+        try {
+        	
+            // Generate a PDF at the specified location
+            PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("Resume.pdf"));
+            System.out.println("PDF created.");
+            Font boldFont = new Font(Font.FontFamily.HELVETICA, 30, Font.BOLD);
+            Font topicFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
+		    Font subtopicFont = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+            Font bluecoloredFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+            bluecoloredFont.setColor(BaseColor.BLUE); 
+            
+
+            // Opens the PDF
+            doc.open();
+            
+            
+
+            // Adds paragraph to the PDF file
+            doc.add(new Paragraph("\tJustin Raj",boldFont));
+            
+            doc.add(new Paragraph("\tjustinraj958@gmail.com",bluecoloredFont));
+            doc.add(new Paragraph("\t9677548836"));
+
+                                 
+            // Get the direct content of the writer
+            PdfContentByte contentByte = writer.getDirectContent();
+            // Set the line properties
+            contentByte.setLineWidth(3f); // Line width in points
+            float lineY = 690; // Y-coordinate of the horizontal line
+            contentByte.moveTo(doc.left(), lineY);
+            contentByte.lineTo(doc.right(), lineY);            
+            contentByte.stroke();
+                                    
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("\n"));
+            
+         
+            doc.add(new Paragraph("\tSummary",topicFont));
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("Programming Languages: Proficient in Java and Python, "
+            		+ "with a deep understanding of object-oriented"
+            		+ "programming principles and design patterns. Experienced in building backend systems, RESTful APIs, and"
+            		+ "scalable applications using Java frameworks (e.g., SpringBoot) and Python libraries (e.g., Django)."));            
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("\tExperience",topicFont));
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("\t \t \t \t \t \t Junior Software Developer",subtopicFont));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t FinOS"));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Oct 2022 - Present (10 months)"));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Software for Banking sector"));
+            
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("\t \t \t \t \t \t Software Developer",subtopicFont));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Giri Technologies Private Limited - India"));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Dec 2021 - Jul 2022 (8 months)"));
+            //doc.add(new Paragraph("\t \t \t \t \t \t \t \t Software for Banking sector"));
+            
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("\t \t \t \t \t \t Python Trainee",subtopicFont));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Srishti Innovative"));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Sep 2019 - Jun 2020 (10 months)"));
+            doc.add(new Paragraph("\t \t \t \t \t \t \t \t Software for Banking sector"));
+            
+            doc.add(new Paragraph("\n"));
+            doc.add(new Paragraph("Skill"));
+            doc.add(new Paragraph(""));
+            
+            
+            Paragraph paragraph1 = new Paragraph();
+            paragraph1.add("If you're offered a seat on a rocket ship, don't ask what seat! Just get on.");
+            paragraph1.setSpacingAfter(5f); // Set the spacing after the paragraph (in points)
+
+            Paragraph paragraph2 = new Paragraph();
+            paragraph2.add("The future belongs to those who believe in the beauty of their dreams.");
+            paragraph2.setSpacingAfter(10f); //
+            
+
+            doc.add(paragraph1);
+            doc.add(paragraph2);
+            
+            
+            //String imagePath = "/home/finos003/Downloads/Resume_Creator-master/a.jpg"; // Replace with the path to your icon image
+            String imagePath = "a.jpg";
+            Image icon = null;
+			try {
+				icon = Image.getInstance(imagePath);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            icon.scaleAbsolute(50, 50); // Set the width and height of the icon
+            doc.add(icon);
+            
+            
+            doc.add(new Paragraph("\t \t \t \t \t \t Software Developer",subtopicFont));
+
+            // Close the PDF file
+            doc.close();
+
+
+            
+            
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
